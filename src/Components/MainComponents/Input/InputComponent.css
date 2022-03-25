@@ -1,0 +1,16 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    margin: auto;
+    font-size: 1.5rem;
+}
+.form input{
+    height: 30px;
+    font-size: 1rem;
+}
+.btn{
+    width: 20% !important;
+    margin: auto !important;
+    margin-top: 10px !important;
+}

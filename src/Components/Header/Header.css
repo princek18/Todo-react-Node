@@ -1,0 +1,11 @@
+.head{
+    height: 60px;
+    background-color: aqua;
+    color: black;
+    font-size: 2rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
