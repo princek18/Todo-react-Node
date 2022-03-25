@@ -11,7 +11,7 @@ export const ModalComponent = ({
   isModalOpen,
   setIsModalOpen,
   setFlag,
-  flag
+  flag,
 }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -21,24 +21,26 @@ export const ModalComponent = ({
     todo.description = description;
     let time = moment(new Date()).format("DD-MM-YYYY HH:mm:ss");
     todo.time = time;
-    document.getElementById('loader').style.display = "block";
-    axios.put(`${baseUrl}/edit`, todo)
-    .then((response) => {
-      console.log(response.data);
-      setIsModalOpen(false);
-      setFlag(!flag);
-    })
-    .catch((err) => {
-      alert(err.response.data.message.msg);
-      setIsModalOpen(true)
-    });
-    document.getElementById('loader').style.display = "none";
+    document.getElementById("loader").style.display = "block";
+    axios
+      .put(`${baseUrl}/edit`, todo)
+      .then((response) => {
+        console.log(response.data);
+        setIsModalOpen(false);
+        setFlag(!flag);
+        document.getElementById("loader").style.display = "none";
+      })
+      .catch((err) => {
+        alert(err.response.data.message.msg);
+        setIsModalOpen(true);
+        document.getElementById("loader").style.display = "none";
+      });
   };
   const handleCancel = () => {
     setIsModalOpen(false);
   };
 
-  useEffect(() =>{
+  useEffect(() => {
     setTitle(todo.title);
     setDescription(todo.description);
   }, [todo]);
@@ -66,7 +68,7 @@ export const ModalComponent = ({
           label="Description"
           type="text"
           value={description}
-          style={{width: "100%"}}
+          style={{ width: "100%" }}
           onChange={(e) => setDescription(e.target.value)}
           focused
         />

@@ -12,19 +12,21 @@ export const InputComponent = ({ flag, setFlag }) => {
   const addTodo = (e) => {
     e.preventDefault();
     let time = new Date();
-    time = moment(time).format("DD-MM-YYYY HH:mm:ss")
-    document.getElementById('loader').style.display = "block";
-    axios.post(`${baseUrl}/addtodo`, {title, description, time})
-    .then((response) => {
-      console.log(response.data);
-      setFlag(!flag);
-      setTitle("");
-      setDescription("");
-    })
-    .catch((err) => {
-      alert(err.response.data.message.msg);
-    })
-    document.getElementById('loader').style.display = "none";
+    time = moment(time).format("DD-MM-YYYY HH:mm:ss");
+    document.getElementById("loader").style.display = "block";
+    axios
+      .post(`${baseUrl}/addtodo`, { title, description, time })
+      .then((response) => {
+        console.log(response.data);
+        setFlag(!flag);
+        setTitle("");
+        setDescription("");
+        document.getElementById("loader").style.display = "none";
+      })
+      .catch((err) => {
+        alert(err.response.data.message.msg);
+        document.getElementById("loader").style.display = "none";
+      });
   };
   return (
     <form className="form" onSubmit={addTodo}>
