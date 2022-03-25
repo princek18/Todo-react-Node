@@ -48,7 +48,7 @@ export const ModalComponent = ({
   return (
     <>
       <Modal
-        title="Basic Modal"
+        title="Edit"
         visible={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
