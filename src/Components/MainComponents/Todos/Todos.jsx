@@ -19,6 +19,7 @@ export const Todos = ({flag, setFlag}) => {
 
   const CardData = ({box, todo}) => {
     const addTo_Done = () => {
+      document.getElementById('loader').style.display = "block";
       axios.post(`${baseUrl}/addtodone`, todo)
       .then((response) => {
         console.log(response.data);
@@ -27,9 +28,11 @@ export const Todos = ({flag, setFlag}) => {
       .catch((err) => {
         alert(err.response.data.message.msg);
       });
+      document.getElementById('loader').style.display = "none";
     }
     
     const addTo_Todo = () => {
+      document.getElementById('loader').style.display = "block";
       axios.post(`${baseUrl}/addtotodo`, todo)
       .then((response) => {
         console.log(response.data);
@@ -38,6 +41,7 @@ export const Todos = ({flag, setFlag}) => {
       .catch((err) => {
         alert(err.response.data.message.msg);
       });
+      document.getElementById('loader').style.display = "none";
     }
 
     const handleModal = () => {
@@ -46,7 +50,7 @@ export const Todos = ({flag, setFlag}) => {
     }
 
     const deleteTodo = () => {
-      console.log(todo);
+      document.getElementById('loader').style.display = "block";
       axios.post(`${baseUrl}/tododelete`, todo)
       .then((response) => {
         console.log(response.data);
@@ -55,6 +59,7 @@ export const Todos = ({flag, setFlag}) => {
       .catch((err) => {
         alert(err.response.data.message.msg);
       });
+      document.getElementById('loader').style.display = "none";
     }
 
     return (
@@ -93,6 +98,7 @@ export const Todos = ({flag, setFlag}) => {
   };
 
   useEffect(() => {
+    document.getElementById('loader').style.display = "block";
     axios.get(`${baseUrl}/todos`)
     .then((response) => {
       setTodos(response.data);
@@ -108,6 +114,7 @@ export const Todos = ({flag, setFlag}) => {
     .catch((err) => {
       console.log(err.message);
     });
+    document.getElementById('loader').style.display = "none";
   }, [flag]);
 
   return (

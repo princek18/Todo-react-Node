@@ -21,6 +21,7 @@ export const ModalComponent = ({
     todo.description = description;
     let time = moment(new Date()).format("DD-MM-YYYY HH:mm:ss");
     todo.time = time;
+    document.getElementById('loader').style.display = "block";
     axios.put(`${baseUrl}/edit`, todo)
     .then((response) => {
       console.log(response.data);
@@ -31,6 +32,7 @@ export const ModalComponent = ({
       alert(err.response.data.message.msg);
       setIsModalOpen(true)
     });
+    document.getElementById('loader').style.display = "none";
   };
   const handleCancel = () => {
     setIsModalOpen(false);

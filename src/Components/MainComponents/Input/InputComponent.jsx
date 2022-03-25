@@ -6,13 +6,14 @@ import { baseUrl } from "../MainComponent";
 import moment from "moment";
 
 export const InputComponent = ({ flag, setFlag }) => {
-  const [title, setTitle] = useState(null);
-  const [description, setDescription] = useState(null);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
 
   const addTodo = (e) => {
     e.preventDefault();
     let time = new Date();
     time = moment(time).format("DD-MM-YYYY HH:mm:ss")
+    document.getElementById('loader').style.display = "block";
     axios.post(`${baseUrl}/addtodo`, {title, description, time})
     .then((response) => {
       console.log(response.data);
@@ -23,6 +24,7 @@ export const InputComponent = ({ flag, setFlag }) => {
     .catch((err) => {
       alert(err.response.data.message.msg);
     })
+    document.getElementById('loader').style.display = "none";
   };
   return (
     <form className="form" onSubmit={addTodo}>
