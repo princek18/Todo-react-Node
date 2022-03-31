@@ -23,13 +23,13 @@ export const Todos = ({ flag, setFlag }) => {
       axios
         .post(`${baseUrl}/addtodone`, todo)
         .then((response) => {
+          document.getElementById("loader").style.display = "none";
           console.log(response.data);
           setFlag(!flag);
-          document.getElementById("loader").style.display = "none";
         })
         .catch((err) => {
-          alert(err.response.data.message.msg);
           document.getElementById("loader").style.display = "none";
+          alert(err.response.data.message.msg);
         });
     };
 
@@ -38,13 +38,13 @@ export const Todos = ({ flag, setFlag }) => {
       axios
         .post(`${baseUrl}/addtotodo`, todo)
         .then((response) => {
+          document.getElementById("loader").style.display = "none";
           console.log(response.data);
           setFlag(!flag);
-          document.getElementById("loader").style.display = "none";
         })
         .catch((err) => {
-          alert(err.response.data.message.msg);
           document.getElementById("loader").style.display = "none";
+          alert(err.response.data.message.msg);
         });
     };
 
@@ -58,13 +58,13 @@ export const Todos = ({ flag, setFlag }) => {
       axios
         .post(`${baseUrl}/tododelete`, todo)
         .then((response) => {
+          document.getElementById("loader").style.display = "none";
           console.log(response.data);
           setFlag(!flag);
-          document.getElementById("loader").style.display = "none";
         })
         .catch((err) => {
-          alert(err.response.data.message.msg);
           document.getElementById("loader").style.display = "none";
+          alert(err.response.data.message.msg);
         });
     };
 
@@ -123,23 +123,23 @@ export const Todos = ({ flag, setFlag }) => {
     axios
       .get(`${baseUrl}/todos`)
       .then((response) => {
-        setTodos(response.data);
         document.getElementById("loader").style.display = "none";
+        setTodos(response.data);
       })
       .catch((err) => {
-        console.log(err.message);
         document.getElementById("loader").style.display = "none";
+        console.log(err.message);
       });
 
     axios
       .get(`${baseUrl}/donetodos`)
       .then((response) => {
-        setDoneTodos(response.data);
         document.getElementById("loader").style.display = "none";
+        setDoneTodos(response.data);
       })
       .catch((err) => {
-        console.log(err.message);
         document.getElementById("loader").style.display = "none";
+        console.log(err.message);
       });
   }, [flag]);
 

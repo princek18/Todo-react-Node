@@ -25,15 +25,16 @@ export const ModalComponent = ({
     axios
       .put(`${baseUrl}/edit`, todo)
       .then((response) => {
+        document.getElementById("loader").style.display = "none";
         console.log(response.data);
         setIsModalOpen(false);
         setFlag(!flag);
-        document.getElementById("loader").style.display = "none";
       })
       .catch((err) => {
-        alert(err.response.data.message.msg);
-        setIsModalOpen(true);
         document.getElementById("loader").style.display = "none";
+        console.log(err.response.data);
+        alert(err.response.data);
+        setIsModalOpen(true);
       });
   };
   const handleCancel = () => {

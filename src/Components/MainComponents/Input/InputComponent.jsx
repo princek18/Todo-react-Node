@@ -17,15 +17,15 @@ export const InputComponent = ({ flag, setFlag }) => {
     axios
       .post(`${baseUrl}/addtodo`, { title, description, time })
       .then((response) => {
+        document.getElementById("loader").style.display = "none";
         console.log(response.data);
         setFlag(!flag);
         setTitle("");
         setDescription("");
-        document.getElementById("loader").style.display = "none";
       })
       .catch((err) => {
-        alert(err.response.data.message.msg);
         document.getElementById("loader").style.display = "none";
+        alert(err.response.data);
       });
   };
   return (
