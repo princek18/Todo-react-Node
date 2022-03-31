@@ -7,9 +7,8 @@ import {
   CardContent,
   Typography,
 } from "@mui/material";
-import axios from "axios";
-import { baseUrl } from "../MainComponent";
 import { ModalComponent } from "../Modal/ModalComponent";
+import { requestAPI } from "../../../utlis/utils";
 
 export const Todos = ({ flag, setFlag }) => {
   const [todos, setTodos] = useState([]);
@@ -20,8 +19,7 @@ export const Todos = ({ flag, setFlag }) => {
   const CardData = ({ box, todo }) => {
     const addTo_Done = () => {
       document.getElementById("loader").style.display = "block";
-      axios
-        .post(`${baseUrl}/addtodone`, todo)
+      requestAPI('POST', '/addtodone', todo, null)
         .then((response) => {
           document.getElementById("loader").style.display = "none";
           console.log(response.data);
@@ -35,8 +33,7 @@ export const Todos = ({ flag, setFlag }) => {
 
     const addTo_Todo = () => {
       document.getElementById("loader").style.display = "block";
-      axios
-        .post(`${baseUrl}/addtotodo`, todo)
+      requestAPI('POST', '/addtotodo', todo, null)
         .then((response) => {
           document.getElementById("loader").style.display = "none";
           console.log(response.data);
@@ -55,8 +52,7 @@ export const Todos = ({ flag, setFlag }) => {
 
     const deleteTodo = () => {
       document.getElementById("loader").style.display = "block";
-      axios
-        .post(`${baseUrl}/tododelete`, todo)
+      requestAPI('POST', '/tododelete', todo, null)
         .then((response) => {
           document.getElementById("loader").style.display = "none";
           console.log(response.data);
@@ -120,8 +116,7 @@ export const Todos = ({ flag, setFlag }) => {
 
   useEffect(() => {
     document.getElementById("loader").style.display = "block";
-    axios
-      .get(`${baseUrl}/todos`)
+    requestAPI('GET', '/todos', null, null)
       .then((response) => {
         document.getElementById("loader").style.display = "none";
         setTodos(response.data);
@@ -131,8 +126,7 @@ export const Todos = ({ flag, setFlag }) => {
         console.log(err.message);
       });
 
-    axios
-      .get(`${baseUrl}/donetodos`)
+      requestAPI('GET', '/donetodos', null, null)
       .then((response) => {
         document.getElementById("loader").style.display = "none";
         setDoneTodos(response.data);

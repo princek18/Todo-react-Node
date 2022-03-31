@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import "./InputComponent.css";
 import { Button } from "@mui/material";
-import axios from "axios";
-import { baseUrl } from "../MainComponent";
 import moment from "moment";
+import { requestAPI } from "../../../utlis/utils";
 
 export const InputComponent = ({ flag, setFlag }) => {
   const [title, setTitle] = useState("");
@@ -14,8 +13,7 @@ export const InputComponent = ({ flag, setFlag }) => {
     let time = new Date();
     time = moment(time).format("DD-MM-YYYY HH:mm:ss");
     document.getElementById("loader").style.display = "block";
-    axios
-      .post(`${baseUrl}/addtodo`, { title, description, time })
+    requestAPI('POST', '/addtodo', { title, description, time }, null)
       .then((response) => {
         document.getElementById("loader").style.display = "none";
         console.log(response.data);

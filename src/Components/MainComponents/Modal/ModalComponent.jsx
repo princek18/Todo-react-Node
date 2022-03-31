@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Modal } from "antd";
 import "./ModalComponent.css";
 import { TextField } from "@mui/material";
-import axios from "axios";
-import { baseUrl } from "../MainComponent";
 import moment from "moment";
+import { requestAPI } from "../../../utlis/utils";
 
 export const ModalComponent = ({
   todo,
@@ -22,8 +21,7 @@ export const ModalComponent = ({
     let time = moment(new Date()).format("DD-MM-YYYY HH:mm:ss");
     todo.time = time;
     document.getElementById("loader").style.display = "block";
-    axios
-      .put(`${baseUrl}/edit`, todo)
+    requestAPI('PUT', '/edit', todo, null)
       .then((response) => {
         document.getElementById("loader").style.display = "none";
         console.log(response.data);
