@@ -4,8 +4,14 @@
     color: black;
     font-size: 2rem;
     font-weight: 600;
+}
+.head-div{
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
+    padding: 0px 10px;
 }
+/* .para{
+    margin: "0";
+} */

@@ -1,0 +1,15 @@
+.form-cmp{
+    width: 400px;
+    margin: auto;
+    margin-top: 15vh;
+    border-radius: 20px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 10px 0px;
+}
+.frm{
+    margin: 100px 10px;
+}
+.login{
+    display: flex;
+    justify-content: center;
+}

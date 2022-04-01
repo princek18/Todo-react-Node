@@ -1,5 +1,6 @@
 .foot{
-    top: 50vh;
+    top: 30vh;
+    width: 100%;
     position: relative;
     height: 60px;
     background-color: aqua;
