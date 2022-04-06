@@ -16,3 +16,8 @@ export const requestAPI = async (method, url, data, params) => {
     
       return promise;
 }
+
+export const logout = () => {
+  localStorage.removeItem('authToken');
+  window.location.reload();
+}

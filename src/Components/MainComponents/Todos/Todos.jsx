@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { ModalComponent } from "../Modal/ModalComponent";
-import { requestAPI } from "../../../utlis/utils";
+import { logout, requestAPI } from "../../../utlis/utils";
 
 export const Todos = ({ flag, setFlag }) => {
   const [todos, setTodos] = useState([]);
@@ -123,7 +123,10 @@ export const Todos = ({ flag, setFlag }) => {
       })
       .catch((err) => {
         document.getElementById("loader").style.display = "none";
-        console.log(err.message);
+        alert(err.message);
+        if (err.message === "Authentication Failed.") {
+          logout();
+        }
       });
 
       requestAPI('GET', '/donetodos', null, null)
@@ -133,7 +136,7 @@ export const Todos = ({ flag, setFlag }) => {
       })
       .catch((err) => {
         document.getElementById("loader").style.display = "none";
-        console.log(err.message);
+        alert(err.message);
       });
   }, [flag]);
 

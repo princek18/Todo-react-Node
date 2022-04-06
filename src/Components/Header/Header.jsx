@@ -1,12 +1,9 @@
 import { Button } from '@mui/material'
 import React from 'react'
+import { logout } from '../../utlis/utils'
 import './Header.css'
 
 export const Header = () => {
-  const logout = () => {
-    localStorage.removeItem('authToken');
-    window.location.reload();
-  }
   return (
     <header className='head'>
       <div className='head-div'>
