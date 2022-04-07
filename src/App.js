@@ -11,7 +11,6 @@ const AuthRoute = ({ children }) => {
   if (!localStorage.getItem("authToken")) {
     return <Navigate to="/login" />;
   }
-
   
   return children;
 };
