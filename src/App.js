@@ -12,6 +12,7 @@ const AuthRoute = ({ children }) => {
     return <Navigate to="/login" />;
   }
 
+  
   return children;
 };
 
