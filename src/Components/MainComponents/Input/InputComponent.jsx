@@ -10,21 +10,35 @@ export const InputComponent = ({ flag, setFlag }) => {
 
   const addTodo = (e) => {
     e.preventDefault();
-    let time = new Date();
-    time = moment(time).format("DD-MM-YYYY HH:mm:ss");
-    document.getElementById("loader").style.display = "block";
-    requestAPI('POST', '/addtodo', { title, description, time }, null)
-      .then((response) => {
-        document.getElementById("loader").style.display = "none";
-        console.log(response.data);
-        setFlag(!flag);
-        setTitle("");
-        setDescription("");
-      })
-      .catch((err) => {
-        document.getElementById("loader").style.display = "none";
-        alert(err.response.data);
-      });
+    if (title === null || title === "") {
+      alert("Please provide title.")
+    }
+    else if (title.length < 5) {
+      alert("Title should be of atleast 5 characters.")
+    }
+    else if (description === null || description === "") {
+      alert("Please provide description.")
+    }
+    else if (description.length < 10) {
+      alert("Description should be of atleast 10 characters.")
+    }
+    else{
+      let time = new Date();
+      time = moment(time).format("DD-MM-YYYY HH:mm:ss");
+      document.getElementById("loader").style.display = "block";
+      requestAPI('POST', '/addtodo', { title, description, time }, null)
+        .then((response) => {
+          document.getElementById("loader").style.display = "none";
+          console.log(response.data);
+          setFlag(!flag);
+          setTitle("");
+          setDescription("");
+        })
+        .catch((err) => {
+          document.getElementById("loader").style.display = "none";
+          alert(err.response.data);
+        });
+    }
   };
   return (
     <form className="form" onSubmit={addTodo}>

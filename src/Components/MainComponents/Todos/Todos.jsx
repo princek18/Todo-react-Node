@@ -15,6 +15,27 @@ export const Todos = ({ flag, setFlag }) => {
   const [doneTodos, setDoneTodos] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalData, setModalData] = useState([]);
+  const [searchParam, setSearchParam] = useState("");
+  const [stodos, setStodos] = useState([]);
+  const [sdoneTodos, setSdoneTodos] = useState([]);
+
+  const searchHandle = (e) => {
+    setSearchParam(e.target.value);
+    let data = [];
+    let data1 = [];
+    for (let i = 0; i < todos.length; i++) {
+      if (todos[i].title.toLowerCase().indexOf(e.target.value.toLowerCase()) > -1 ) {
+        data.push(todos[i]);
+      }
+    }
+    for (let i = 0; i < doneTodos.length; i++) {
+      if (doneTodos[i].title.toLowerCase().indexOf(e.target.value.toLowerCase()) > -1 ) {
+        data1.push(doneTodos[i]);
+      }
+    }
+    setStodos(data);
+    setSdoneTodos(data1);
+  }
 
   const CardData = ({ box, todo }) => {
     const addTo_Done = () => {
@@ -120,11 +141,12 @@ export const Todos = ({ flag, setFlag }) => {
       .then((response) => {
         document.getElementById("loader").style.display = "none";
         setTodos(response.data);
+        setStodos(response.data);
       })
       .catch((err) => {
         document.getElementById("loader").style.display = "none";
         alert(err.message);
-        if (err.message === "Authentication Failed.") {
+        if (err.response.data === "Authentication Failed.") {
           logout();
         }
       });
@@ -133,6 +155,7 @@ export const Todos = ({ flag, setFlag }) => {
       .then((response) => {
         document.getElementById("loader").style.display = "none";
         setDoneTodos(response.data);
+        setSdoneTodos(response.data);
       })
       .catch((err) => {
         document.getElementById("loader").style.display = "none";
@@ -142,9 +165,14 @@ export const Todos = ({ flag, setFlag }) => {
 
   return (
     <>
+    {todos.length > 0 || doneTodos.length > 0?
+    <div className="search">
+    <input placeholder="Search Tasks..." onChange={searchHandle} type="text" value={searchParam} />
+    </div>:null
+  }
       <div className="todos">
-        {todos &&
-          todos.map((todo) => {
+        {stodos &&
+          stodos.map((todo) => {
             return (
               <Card
                 key={todo.id}
@@ -157,11 +185,11 @@ export const Todos = ({ flag, setFlag }) => {
             );
           })}
       </div>
-      {doneTodos.length > 0 && (
+      {sdoneTodos.length > 0 && (
         <>
           <h1>Completed Tasks</h1>
           <div className="todos">
-            {doneTodos.map((todo) => {
+            {sdoneTodos.map((todo) => {
               return (
                 <Card
                   key={todo.id}

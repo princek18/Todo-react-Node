@@ -11,6 +11,7 @@ export const LoginComponent = () => {
       .then((res) => {
         document.getElementById("loader").style.display = "none";
         localStorage.setItem('authToken', res.data.authToken);
+        localStorage.setItem('name', res.data.user.firstName + " "+ res.data.user.lastName);
         window.location.href = '/todo';
       })
       .catch((err) => {
