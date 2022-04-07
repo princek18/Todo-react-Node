@@ -13,9 +13,6 @@ const AuthRoute = ({ children }) => {
   }
 
 
-
-
-  
   return children;
 };
 
